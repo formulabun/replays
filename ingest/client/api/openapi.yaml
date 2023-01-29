@@ -1,0 +1,88 @@
+openapi: 3.0.0
+info:
+  title: GoBun File Info
+  version: 0.0.1
+servers:
+- url: info.replay
+paths:
+  /graphQL:
+    get:
+      description: |
+        This endpoint is the graphQL query endpoint. The qraphQL query should be supplied in the URL query.
+      parameters:
+      - content:
+          application/graphql-request:
+            schema:
+              type: string
+        description: graphQL query
+        in: query
+        name: graphQL query
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/graphql'
+          description: successfull request
+        "400":
+          description: incorrect query
+      summary: Query replays
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/replay'
+      responses:
+        "201":
+          description: successfull request
+        "400":
+          description: bad body
+      summary: Create new replay entry
+components:
+  schemas:
+    graphql:
+      example:
+        data: "{}"
+        errors:
+        - "{}"
+        - "{}"
+      properties:
+        data:
+          type: object
+        errors:
+          items:
+            type: object
+          type: array
+      type: object
+    replay:
+      properties:
+        Title:
+          type: string
+        GameMap:
+          type: number
+        Time:
+          type: number
+        Lap:
+          type: number
+        PlayerEntries:
+          items:
+            $ref: '#/components/schemas/PlayerEntry'
+          type: array
+      type: object
+    PlayerEntry:
+      properties:
+        Name:
+          type: string
+        Skin:
+          type: string
+        Color:
+          type: string
+        Score:
+          type: number
+        Speed:
+          type: number
+        Weight:
+          type: number
+      type: object
