@@ -10,13 +10,17 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
 
 	openapi "go.formulabun.club/replays/staff/server/go"
 )
 
+var addr = flag.String("addr", ":8080", "Address to host on")
+
 func main() {
+	flag.Parse()
 	log.Printf("Server started")
 
 	DefaultApiService := openapi.NewDefaultApiService()
@@ -24,5 +28,5 @@ func main() {
 
 	router := openapi.NewRouter(DefaultApiController)
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	log.Fatal(http.ListenAndServe(*addr, router))
 }

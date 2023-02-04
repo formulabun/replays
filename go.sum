@@ -6,3 +6,5 @@ go.formulabun.club/functional v0.0.0-20221218180115-a1d18adcf950 h1:fsiWO87TPGF4
 go.formulabun.club/functional v0.0.0-20221218180115-a1d18adcf950/go.mod h1:fBYvWF+wIMLTXhQKS9o1mh5EccRFqqnY0tprsZU5EEg=
 go.formulabun.club/srb2kart v0.0.0-20221230121727-74d7ef86b554 h1:+x5TK4nVgZAdoVArQxOC669/jwLq0KCXLJOvtOIWPJc=
 go.formulabun.club/srb2kart v0.0.0-20221230121727-74d7ef86b554/go.mod h1:J5shaQmUtXJNuLFYPLqmO/mTa12qB+cKwr2AKRlU638=
+go.formulabun.club/srb2kart v0.0.1 h1:ETeiu6UMlT0v9THVrPViVMZInjPz01LL5nIBIHkXf1U=
+go.formulabun.club/srb2kart v0.0.1/go.mod h1:J5shaQmUtXJNuLFYPLqmO/mTa12qB+cKwr2AKRlU638=

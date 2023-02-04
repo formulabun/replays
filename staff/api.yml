@@ -18,7 +18,7 @@ paths:
           allowEmptyValue: false
           schema:
             type: string
-          example: 5467b9431885cea64dc7679f29f92e12
+          example: 5
 
       responses:
         200: 
@@ -31,7 +31,6 @@ paths:
               schema:
                 type: string
                 format: binary
-
 
         404:
           description: Replay does not exist
@@ -51,8 +50,9 @@ paths:
             items:
               type: string
           example:
-            - 5467b9431885cea64dc7679f29f92e12
-            - 28e0c2444c531ede4e03c7a27eaa7de9
+            - 5
+            - 6
+            - 10
 
       responses:
         200:
@@ -62,8 +62,10 @@ paths:
               schema:
                 type: string
                 format: binary
+
         204:
           description: No ids were provided
+
         206:
           description: Not all ids could be found
           content:
