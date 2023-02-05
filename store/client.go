@@ -7,14 +7,14 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
-	"go.formulabun.club/srb2kart/lump"
+	"go.formulabun.club/srb2kart/lump/replay"
 )
 
 type columnScanner interface {
 	Scan(dest ...any) error
 }
 
-func ConvertToStoreData(replay lump.ReplayRaw) (r Replay, files []ReplayFile, err error) {
+func ConvertToStoreData(replay replay.ReplayRaw) (r Replay, files []ReplayFile, err error) {
 	if len(replay.PlayerEntries) != 1 {
 		err = errors.New("Replay file doesn't contain exactly 1 player")
 		return
@@ -40,7 +40,7 @@ func ConvertToStoreData(replay lump.ReplayRaw) (r Replay, files []ReplayFile, er
 	return r, files, nil
 }
 
-func (db *Client) InsertReplayRaw(replay lump.ReplayRaw) (id int64, err error) {
+func (db *Client) InsertReplayRaw(replay replay.ReplayRaw) (id int64, err error) {
 	r, files, err := ConvertToStoreData(replay)
 	if err != nil {
 		return 0, err

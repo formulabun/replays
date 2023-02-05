@@ -3,7 +3,7 @@ package store
 import (
 	"testing"
 
-	"go.formulabun.club/srb2kart/lump"
+	"go.formulabun.club/srb2kart/lump/replay"
 )
 
 func TestInsertAndGet(t *testing.T) {

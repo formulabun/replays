@@ -20,7 +20,7 @@ import (
 
 	"go.formulabun.club/functional/array"
 	"go.formulabun.club/replays/store"
-	"go.formulabun.club/srb2kart/lump"
+	"go.formulabun.club/srb2kart/lump/replay"
 )
 
 // DefaultApiService is a service that implements the logic for the DefaultApiServicer
@@ -58,7 +58,7 @@ func (s *DefaultApiService) ListGet(ctx context.Context) (ImplResponse, error) {
 
 // RootPost - Upload a new replay file
 func (s *DefaultApiService) RootPost(ctx context.Context, data io.ReadCloser) (ImplResponse, error) {
-	header, err := lump.ReadReplay(data)
+	header, err := replay.ReadReplay(data)
 	if err != nil {
 		return Response(http.StatusBadRequest, nil), err
 	}
