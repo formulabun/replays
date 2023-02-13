@@ -74,19 +74,16 @@ ctx = context.WithValue(context.Background(), openapi.ContextOperationServerVari
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://info.replay*
+All URIs are relative to *http://storage.replay:8080*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**GraphQLGet**](docs/DefaultApi.md#graphqlget) | **Get** /graphQL | Query replays
-*DefaultApi* | [**GraphQLPost**](docs/DefaultApi.md#graphqlpost) | **Post** /graphQL | Create new replay entry
+*DefaultApi* | [**ListGet**](docs/DefaultApi.md#listget) | **Get** /list | Get the list of replay files
+*DefaultApi* | [**RootPost**](docs/DefaultApi.md#rootpost) | **Post** / | Upload a new replay file
 
 
 ## Documentation For Models
 
- - [Graphql](docs/Graphql.md)
- - [PlayerEntry](docs/PlayerEntry.md)
- - [Replay](docs/Replay.md)
 
 
 ## Documentation For Authorization

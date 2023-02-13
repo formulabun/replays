@@ -36,9 +36,9 @@ func NewDefaultApiService() DefaultApiServicer {
 	for err != nil {
 		log.Printf("Could not establish database connection %s", err)
 		<-time.After(time.Second * 5)
-    c, err = store.NewClient()
+		c, err = store.NewClient()
 	}
-  log.Print("Database connection established.")
+	log.Print("Database connection established.")
 	return &DefaultApiService{c}
 }
 
@@ -65,6 +65,9 @@ func (s *DefaultApiService) RootPost(ctx context.Context, data io.ReadCloser) (I
 
 	id, err := s.db.InsertReplayRaw(header)
 	if err != nil {
+		if store.DuplicateEntryError.Is(err) {
+			return Response(http.StatusConflict, "This replay is already present in the database"), fmt.Errorf("Could not save replay to db: %s", err)
+		}
 		return Response(http.StatusInternalServerError, "Internal Server Error"), fmt.Errorf("Could not save replay to db: %s", err)
 	}
 

@@ -4,7 +4,7 @@ info:
   version: 0.0.1
 
 servers:
-  - url: "storage.replay"
+  - url: "http://ingest.replays:8080"
 
 paths:
   /:
