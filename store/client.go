@@ -2,7 +2,6 @@ package store
 
 import (
 	"encoding/hex"
-	"errors"
 	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -16,7 +15,7 @@ type columnScanner interface {
 
 func ConvertToStoreData(replay replay.ReplayRaw) (r Replay, files []ReplayFile, err error) {
 	if len(replay.PlayerEntries) != 1 {
-		err = errors.New("Replay file doesn't contain exactly 1 player")
+		err = fmt.Errorf("Replay file doesn't contain exactly 1 player, it contains %v", len(replay.PlayerEntries))
 		return
 	}
 	player := replay.PlayerEntries[0]
@@ -71,7 +70,7 @@ VALUE
 	id, err = res.LastInsertId()
 
 	for _, file := range files {
-    checksum := hex.EncodeToString(file.FileCheckSum[:])
+		checksum := hex.EncodeToString(file.FileCheckSum[:])
 		_, err = t.Exec(
 			`
 INSERT INTO replayfiles
@@ -79,7 +78,7 @@ INSERT INTO replayfiles
 VALUE
 (?, ?, ?)
 `,
-    id, file.FileName, checksum)
+			id, file.FileName, checksum)
 		if err != nil {
 			t.Rollback()
 			return
@@ -142,8 +141,9 @@ func (db *Client) FindReplay(r Replay) ([]Replay, error) {
 
 	where = fmt.Sprintf(where, cMap, cTime, cLap, cSpeed, cWeight)
 	rows, err := db.Query(
-		fmt.Sprintf(`SELECT * FROM replays
-    %s`, where),
+		fmt.Sprintf(`SELECT ReplayID, GameMap, min(Time), BestLap, PlayerName, PlayerSkin, Playercolor, Speed, weight FROM replays
+    %s
+    GROUP BY PlayerName`, where),
 		r.GameMap, r.Time, r.BestLap, r.Speed, r.Weight)
 
 	var result = []Replay{}
