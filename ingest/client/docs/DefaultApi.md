@@ -1,6 +1,6 @@
 # \DefaultApi
 
-All URIs are relative to *http://storage.replay:8080*
+All URIs are relative to *http://ingest.replays:8080*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

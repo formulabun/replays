@@ -143,7 +143,8 @@ func (db *Client) FindReplay(r Replay) ([]Replay, error) {
 	rows, err := db.Query(
 		fmt.Sprintf(`SELECT ReplayID, GameMap, min(Time), BestLap, PlayerName, PlayerSkin, Playercolor, Speed, weight FROM replays
     %s
-    GROUP BY PlayerName`, where),
+    GROUP BY PlayerName
+    ORDER BY Time ASC`, where),
 		r.GameMap, r.Time, r.BestLap, r.Speed, r.Weight)
 
 	var result = []Replay{}

@@ -105,7 +105,7 @@ func NewConfiguration() *Configuration {
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{
-				URL: "http://storage.replay:8080",
+				URL: "http://ingest.replays:8080",
 				Description: "No description provided",
 			},
 		},
