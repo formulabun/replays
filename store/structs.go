@@ -3,6 +3,7 @@ package store
 import (
 	"database/sql"
 	"fmt"
+	"os"
 )
 
 type Client struct {
@@ -27,7 +28,8 @@ type Replay struct {
 }
 
 func makeClient(databaseName string) (Client, error) {
-	db, err := sql.Open("mysql", fmt.Sprintf("root:pass@tcp(replaydb)/%s", databaseName))
+	passwd, _ := os.LookupEnv("MARIADB_ROOT_PASSWORD")
+	db, err := sql.Open("mysql", fmt.Sprintf("root:%s@tcp(replaydb)/%s", passwd, databaseName))
 	if err != nil {
 		return Client{}, err
 	}
@@ -38,11 +40,11 @@ func makeClient(databaseName string) (Client, error) {
 }
 
 func NewClient() (Client, error) {
-  return makeClient("replays")
+	return makeClient("replays")
 }
 
 func newTestClient() (Client, error) {
-  return makeClient("testReplays")
+	return makeClient("testReplays")
 }
 
 func (r Replay) String() string {
