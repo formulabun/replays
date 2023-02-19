@@ -14,6 +14,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"math"
 	"net/http"
 	"os"
 	"time"
@@ -61,6 +62,10 @@ func (s *DefaultApiService) RootPost(ctx context.Context, data io.ReadCloser) (I
 	header, err := replay.ReadReplay(data)
 	if err != nil {
 		return Response(http.StatusBadRequest, nil), err
+	}
+
+	if header.Time == math.MaxUint32 {
+		return Response(http.StatusBadRequest, "this replay is unfinished"), nil
 	}
 
 	id, err := s.db.InsertReplayRaw(header)

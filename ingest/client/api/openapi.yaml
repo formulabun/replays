@@ -3,7 +3,7 @@ info:
   title: GoBun File Store
   version: 0.0.1
 servers:
-- url: http://storage.replay:8080
+- url: http://ingest.replays:8080
 paths:
   /:
     post:
