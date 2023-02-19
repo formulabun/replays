@@ -65,7 +65,7 @@ func (s *DefaultApiService) RootPost(ctx context.Context, data io.ReadCloser) (I
 	}
 
 	if header.Time == math.MaxUint32 {
-		return Response(http.StatusBadRequest, "this replay is unfisinhed"), nil
+		return Response(http.StatusBadRequest, "this replay is unfinished"), nil
 	}
 
 	id, err := s.db.InsertReplayRaw(header)
